@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Task App</title>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="column">
+            <div class="criar-task">
+                <h2>Create Task</h2>
+                <form class="form-create" action="#">
+                    <div class="form-item">
+                        <input class="form-element" type="text" name="description" id="form-description" placeholder="Enter description..." required>
+                    </div>
+    
+                    <div class="form-item">
+                        <input class="form-element" type="text" name="responsible" id="form-responsible" placeholder="Responsible for task...">
+                    </div>
+    
+                    <div class="flex">
+                        <div class="dropdown">
+                            <select name="level" id="level">
+                                <option selected disabled>Level</option>
+                                <option value="level_one">1</option>
+                                <option value="level_tree">3</option>
+                                <option value="level_five">5</option>
+                                <option value="level_eigth">8</option>
+                            </select>
+                        </div>
+    
+                        <div class="dropdown">
+                            <select name="priority" id="priority">
+                                <option selected disabled>Priority</option>
+                                <option value="p_one">1</option>
+                                <option value="p_two">2</option>
+                                <option value="p_tree">3</option>
+                            </select>
+                        </div>
+                    </div>
+    
+                    <div class="form-item">
+                        <input type="submit" value="Add Task">
+                    </div>
+                </form>
+            </div>
+
+            <div class="editar-task toggle">
+                <h2>Change task status</h2>
+                
+                <form class="form-situation" action="#">
+                    <input type="radio" id="progress" name="situation" value="Em andamento">
+                    <label for="progress">Em andamento</label><br>
+                    <input type="radio" id="suspend" name="situation" value="Pendente">
+                    <label for="suspend">Pendente</label><br>  
+                    <input type="radio" id="canceled" name="situation" value="Cancelada">
+                    <label for="age3">Cancelada</label><br><br>
+                    
+                    <div class="form-item">
+                        <input type="submit" value="Edit situation">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="column">
+            <h2>All Tasks</h2>
+
+            <div class="toolbar">
+                <div class="search">
+                    <h4>Search:</h4>
+                    <form action="#">
+                        <input class="form-element" type="text" id="search-input" placeholder="Search">
+                    </form>
+                </div>
+                <div class="filter">
+                    <h4>Filter:</h4>
+                    <div class="dropdown">
+                        <select name="filter" id="filter">
+                            <option value="all" selected>All</option>
+                            <option value="priority">Priority</option>
+                            <option value="level">Level</option>
+                            <option value="priority">Situation</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="task-list" class="task-list">
+                <!--Aqui fica as tasks carregadas pelo javascript-->
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
