@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    min-height: 100vh;
+    color: #f2f7f2;
+    background: linear-gradient(270deg, rgba(143,188,148,1) 48%, rgba(197,233,155,1) 100%);
+}
+
+.container {
+    background-color:#1c4406;
+    border: 1px solid #02733194;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 1200px;
+    border-radius: 5px;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.container .column {
+    padding: 2rem;
+}
+
+/* Task list style*/
+.container .column:last-child {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #033518;
+}
+
+/* form create style*/
+.column .form-create, .form-situation {
+    margin-top: 2rem;
+}
+
+.form-item input[type=text] {
+    width: 100%;
+    border: none;
+    background-color: #ffffffcc;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 2px;
+    transition: box-shadow .2s;
+}
+
+.form-item input[type=text]:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #02733198;
+}
+
+.form-create > * {
+    margin-top: 2rem;
+}
+
+.form-item input[type="submit"] {
+    background-color: #027331;
+    color: inherit;
+    border: 1px solid #033518;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    transition: all .2s;
+}
+
+.form-item input[type="submit"]:hover {
+    background-color: #029b42;
+}
+
+.form-item input[type="submit"]:active {
+    scale: .95;
+    background-color: #02733172;
+}
+
+.flex {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Dropdown */
+select {
+    appearance:none;
+    outline:0;
+    box-shadow:none;
+    border:0!important;
+    background: #027331;
+    background-image: none;
+    flex: 1;
+    padding: 0 .5em;
+    color:inherit;
+    font-weight: 600;
+    cursor:pointer;
+    font-size: 0.9em;
+ }
+
+ select::-ms-expand {
+    display: none;
+ }
+
+ .dropdown {
+    position: relative;
+    display: flex;
+    width: 7em;
+    height: 32px;
+    line-height: 2;
+    background: #f2f7f2;
+    overflow: hidden;
+    border-radius: .25em;
+ }
+
+ .dropdown::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 0.5em;
+    background: #075929;
+    cursor:pointer;
+    pointer-events:none;
+    transition:.25s all ease;
+ }
+ 
+ .dropdown:hover::after {
+    color: #ffffff;
+ }
+
+
+ /* Task Toolbar*/
+.toolbar {
+    padding: 1rem;
+    display: flex;
+}
+
+.toolbar h4 {
+    margin-bottom: .5rem;
+}
+
+.search {
+    padding-right: 1rem;
+    margin-right: 1rem;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+}
+
+.search input {
+    width: 100%;
+    margin-right: 0.3rem;
+    border: none;
+    background-color: #ffffffcc;
+    padding: 5px 20px;
+    font-size: 18px;
+    border-radius: 2px;
+    transition: box-shadow .2s;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}
+
+.search .form-element:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #02733198;
+}
+
+ /* Task List style*/
+.task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    background-color: #027331;
+    transition: .3s;
+}
+
+.task-content h3 {
+    flex: 1;
+    font-size: 1rem;
+}
+
+.task-content h5 {
+    margin-top: 5px;
+}
+
+.task-btns button {
+    margin-left: 0.4rem;
+    cursor: pointer;
+}
+
+.task-btns button i {
+    font-size: 24px;
+}
+
+.done {
+    background-color: #045e297c;
+}
+
+.done h3{
+    text-decoration: line-through;
+    font-style: italic;
+}
+
+.task-content span{
+    font-size: 12px;
+    margin-right: 0.3rem;
+}
+
+.task button {
+    font-size: 18px;
+}
+
+.toggle {
+    display: none;
+}
+
+/* style para input radio*/
+
+.form-situation input[type=radio] {
+    accent-color: #00be65;
+    cursor: pointer;
+}
+
+.form-situation label {
+    color: #f2f7f2;
+}
+
+.form-situation input[type=radio]:hover {
+    color: #029b42;
+}
+
+.cancel {
+    background-color: #7715067c;
+}
+
+.cancel h3{
+    text-decoration: line-through;
+    font-style: italic;
+}
+
+
+/* Responsive */
+@media (max-width:760px) {
+    .container {
+        display: block;
+        width: 500px;
+        text-align: center;
+    }
+
+    .flex {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 1rem;
+    }
+
+    .task {
+        flex-direction: column;
+    }
+
+    .task-btns {
+        display: flex;
+        gap: 3rem;
+        justify-content: space-between;
+        margin-top: 1rem;
+    }
+
+    .task-btns button i{
+        font-size: 32px;
+    }
+
+}
+
