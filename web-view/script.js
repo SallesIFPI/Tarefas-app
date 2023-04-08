@@ -8,120 +8,82 @@ const criar_task = document.querySelector('.criar-task');
 const editar_task = document.querySelector('.editar-task');
 
 let tasks = [];
+let tarefa_id;
 
 //funções
 
-function mostrar_task(tarefa){
-    const task_div = document.createElement('div')
-    task_div.classList.add('task')
+function exibir_tarefa(tarefa) {
+    //div tarefa
+    const div_tarefa = document.createElement('div');
+    if (tarefa.situacao === 'Cancelada'){
+        div_tarefa.classList.add('cancel')
+    }
+    else if (tarefa.situacao === 'Completa'){
+        div_tarefa.classList.add('done')
+    }
+    div_tarefa.classList.add('task');
 
+    //div task-content
     const task_conteudo = document.createElement('div')
     task_conteudo.classList.add('task-content')
-
-    const description = document.createElement('h3')
-    description.innerText = tarefa.descricao
-    task_conteudo.appendChild(description)
-
-    const responsible = document.createElement('h5')
-    if (tarefa.resposavel != null){
-        responsible.innerText = `Responsible: ${tarefa.responsavel}`
-        task_conteudo.appendChild(responsible)
-    }
-
-    const level = document.createElement('span')
-    level.innerText = `Level: ${tarefa.nivel}`
-    task_conteudo.appendChild(level)
-
-    const situation = document.createElement('span')
-    situation.innerText = `Situation: ${tarefa.situacao}`
-    if (tarefa.situacao === 'Completa'){
-        task_div.classList.add('done')
-    }
-    else if (tarefa.situacao === 'Cancelada'){
-        task_div.classList.add('cancel')
-    }
-    task_conteudo.appendChild(situation)
-        
-    const priority = document.createElement('span')
-    priority.innerText = `Priority: ${tarefa.prioridade}`
-    task_conteudo.appendChild(priority)
-
-    task_div.appendChild(task_conteudo)
-
-    return task_div
-}
-
-function btns_task(task) {
-    criar_btns_div = document.createElement('div')
-    criar_btns_div.classList.add('task-btns')
-
-    if (task.situacao === 'Cancelada'){
-
-    }
-
-    //botões da div task
-    const done_btn = document.createElement("button")
-    if (task.situacao === 'Completa'){
-        done_btn.innerHTML = '<i class="bx bxs-check-circle"></i>'
-        criar_btns_div.appendChild(done_btn)
-    }
-    else {
-        done_btn.classList.add('finish-task')
-        done_btn.innerHTML = '<i class="bx bx-check-circle"></i>'
-        //completar task
-        done_btn.onclick = async (event) => {
-            event.preventDefault();
-
-            if (task.situacao != 'Em andamento'){
-                alert("Apenas tasks 'Em andamento' podem ser concluídas")
-            }
-
-            else if (task.situacao === 'Em andamento') {
-                const confirmou = confirm('Deseja marcar como concluida a tasks selecionada?');
+    div_tarefa.appendChild(task_conteudo)
     
-                if (!confirmou){
-                    return
-                }
-        
-                const response = await fetch(baseURL+'/'+task.id+'/completar', {method: 'PUT'});
-                console.log(response)
-                if (response.ok){
-                    carregar_tasks();
-                }
-            }
+    //descrição
+    const descricao = document.createElement('h3');
+    descricao.innerText = tarefa.descricao;
+    task_conteudo.appendChild(descricao);
 
-        }
-
-        criar_btns_div.appendChild(done_btn)
-    }
-    
-    //edit btn
-    const edit_btn = document.createElement("button")
-    edit_btn.classList.add('edit-task')
-    edit_btn.innerHTML = '<i class="bx bx-edit"></i>'
-    criar_btns_div.appendChild(edit_btn)
-    if (task.situacao === 'Completa' || task.situacao=== 'Cancelada'){
-        edit_btn.parentNode.removeChild(edit_btn);
+    //responsável
+    if (tarefa.responsavel != ''){
+        const responsavel = document.createElement('h5');
+        responsavel.innerText = 'Responsável: ' + tarefa.responsavel;
+        task_conteudo.appendChild(responsavel);
     }
 
-    edit_btn.onclick = async (event) => {
-        event.preventDefault()
+
+    //Prioridade
+    const prioridade = document.createElement('span');
+    prioridade.innerText = 'Prioridade: ' + tarefa.prioridade;
+    task_conteudo.appendChild(prioridade);
+
+    //Nível
+    const nivel = document.createElement('span');
+    nivel.innerText = 'Nível: ' + tarefa.nivel;
+    task_conteudo.appendChild(nivel);
+
+    //Situação
+    const situacao = document.createElement('span');
+    situacao.innerText = 'Situação: ' + tarefa.situacao;
+    task_conteudo.appendChild(situacao);
+
+    //div btn
+    const div_btn = document.createElement('div');
+    div_btn.classList.add('task-btns')
+    div_tarefa.appendChild(div_btn)
+
+    //btn editar
+    const btn_editar = document.createElement('button');
+    btn_editar.innerHTML = '<i class="bx bx-edit"></i>'
+    div_btn.appendChild(btn_editar);
+    if (tarefa.situacao === 'Cancelada' || tarefa.situacao === 'Completa'){
+        div_btn.removeChild(btn_editar)
+    }
+    btn_editar.onclick = async () => {
+        tarefa_id = tarefa.id
+
         criar_task.classList.add('toggle')
         editar_task.classList.remove('toggle')
 
         const form_create = document.querySelector('.form-situation')
-        form_create.addEventListener("submit", async function(event){
+        form_create.addEventListener("submit", async function(){
 
-
-            event.preventDefault();
-
-            if (task.situation === 'Canceled'){
-                alert("Only new or in progress tasks can be in suspend")
+            if (tarefa.situation === 'Cancelada'){
+                alert("Apenas tarefas novas ou em andamento podem ser suspensas")
             }
             else {
                 const selected = document.querySelector('input[name=situation]:checked').value
         
-                const response = await fetch(baseURL+'/mudar_situacao/'+task.id+'/'+selected, {method: 'PUT'});
+                const response = await fetch(baseURL+'/mudar_situacao/'+tarefa_id+'/'+selected, {method: 'PUT'});
                 console.log(response)
                 if (response.ok){
                     carregar_tasks()
@@ -132,31 +94,77 @@ function btns_task(task) {
         })
     }
 
-    //delete btn
-    const delete_btn = document.createElement("button")
-    delete_btn.classList.add('remove-task')
-    delete_btn.innerHTML = '<i class="bx bx-task-x"></i>'
+    //btn excluir
+    const btn_excluir = document.createElement('button');
+    btn_excluir.innerHTML = '<i class="bx bx-task-x"></i>';
+    div_btn.appendChild(btn_excluir);
 
-    delete_btn.onclick = async (event) => {
-        event.preventDefault();
-        const confirmou = confirm('Deseja remover a task selecionada?');
+    btn_excluir.onclick = async (event) => {
+        // chamar API método DELETE passando o ID URL
+        event.preventDefault()
+        const confirmou = confirm('Deseja mesmo excluir a tarefa?')
 
-        if (!confirmou){
+        if (!confirmou) {
             return
         }
 
-        const response = await fetch(baseURL+'/'+task.id, {method: 'DELETE'});
+        const response = await fetch(baseURL+'/'+tarefa.id, {method: 'DELETE'})
 
+        // se deu certo..
         if (response.ok){
-            alert('Task removida com sucesso!');
-            carregar_tasks();
+            alert('Tarefa removida com sucesso!')
+            carregar_tasks()
         }
     }
 
-    criar_btns_div.appendChild(delete_btn)
 
-    return criar_btns_div
-} 
+    //btn completar
+    const btn_completar = document.createElement('button');
+    btn_completar.innerText = 'completar';
+    div_btn.appendChild(btn_completar);
+    if (tarefa.situacao === 'Cancelada'){
+        div_btn.removeChild(btn_completar)
+    }
+
+    if (tarefa.situacao === 'Completa'){
+        btn_completar.innerHTML = '<i class="bx bxs-check-circle"></i>'
+        div_btn.appendChild(btn_completar)
+    }
+    else {
+        btn_completar.classList.add('finish-task')
+        btn_completar.innerHTML = '<i class="bx bx-check-circle"></i>'
+        div_btn.appendChild(btn_completar)
+        //completar task
+        btn_completar.onclick = async (event) => {
+
+            tarefa_id = tarefa.id
+            event.preventDefault();
+
+            if (tarefa.situacao != 'Em andamento'){
+                alert("Apenas tasks 'Em andamento' podem ser concluídas")
+            }
+
+            else if (tarefa.situacao === 'Em andamento') {
+                const confirmou = confirm('Deseja marcar como concluida a task selecionada?');
+    
+                if (!confirmou){
+                    return
+                }
+        
+                const response = await fetch(baseURL+'/'+tarefa_id+'/completar', {method: 'PUT'});
+                console.log(response)
+                if (response.ok){
+                    carregar_tasks();
+                }
+            }
+
+        }
+    }
+
+
+    return div_tarefa
+}
+
 
 
 //funções de funcionamento do script
@@ -165,11 +173,9 @@ function atualizar_tela() {
     task_Create.innerHTML = []
 
     for (let task of tasks){
-        var task_criada = mostrar_task(task)
-        var btns = btns_task(task)
+        let mostrar_tarefa = exibir_tarefa(task)
 
-        task_Create.appendChild(task_criada)
-        task_criada.appendChild(btns)
+        task_Create.appendChild(mostrar_tarefa)
     }
 
 }
