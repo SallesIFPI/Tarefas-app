@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,27 +7,27 @@
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Task App</title>
+    <title>Tarefas App</title>
 </head>
 <body>
     
     <div class="container">
         <div class="column">
             <div class="criar-task">
-                <h2>Create Task</h2>
+                <h2>Criar Tarefa</h2>
                 <form class="form-create" action="#">
                     <div class="form-item">
-                        <input class="form-element" type="text" name="description" id="form-description" placeholder="Enter description..." required>
+                        <input class="form-element" type="text" name="description" id="form-description" placeholder="Insira a descrição..." required>
                     </div>
     
                     <div class="form-item">
-                        <input class="form-element" type="text" name="responsible" id="form-responsible" placeholder="Responsible for task...">
+                        <input class="form-element" type="text" name="responsible" id="form-responsible" placeholder="Responsável da tarefa (opcional)">
                     </div>
     
                     <div class="flex">
                         <div class="dropdown">
                             <select name="level" id="level">
-                                <option selected disabled>Level</option>
+                                <option selected disabled>Nível</option>
                                 <option value="level_one">1</option>
                                 <option value="level_tree">3</option>
                                 <option value="level_five">5</option>
@@ -37,7 +37,7 @@
     
                         <div class="dropdown">
                             <select name="priority" id="priority">
-                                <option selected disabled>Priority</option>
+                                <option selected disabled>Prioridade</option>
                                 <option value="p_one">1</option>
                                 <option value="p_two">2</option>
                                 <option value="p_tree">3</option>
@@ -46,13 +46,13 @@
                     </div>
     
                     <div class="form-item">
-                        <input type="submit" value="Add Task">
+                        <input type="submit" value="Adicionar tarefa">
                     </div>
                 </form>
             </div>
 
             <div class="editar-task toggle">
-                <h2>Change task status</h2>
+                <h2>Mudar situação da tarefa</h2>
                 
                 <form class="form-situation" action="#">
                     <input type="radio" id="progress" name="situation" value="Em andamento">
@@ -71,7 +71,7 @@
         </div>
 
         <div class="column">
-            <h2>All Tasks</h2>
+            <h2>Todas as tarefas</h2>
             
             <div id="task-list" class="task-list">
                 <!--Aqui fica as tasks carregadas pelo javascript-->
