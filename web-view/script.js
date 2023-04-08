@@ -69,6 +69,7 @@ function exibir_tarefa(tarefa) {
         div_btn.removeChild(btn_editar)
     }
     btn_editar.onclick = async () => {
+        window.scrollTo(0, 0);
         tarefa_id = tarefa.id
 
         criar_task.classList.add('toggle')
