@@ -1,6 +1,7 @@
 from typing import TypedDict
 
 from bson.objectid import ObjectId
+from decouple import config
 from pymongo import MongoClient
 
 from ..presentation.viewmodels import Tarefa
@@ -18,7 +19,7 @@ class TarefaMongoDBRepositorio():
 
     def __init__(self):
         #conectar ao MongoDB
-        uri = 'mongodb://localhost:27017'
+        uri = config('MONGODB_URL')
         client = MongoClient(uri)
         db = client['tarefasapp']
         self.tarefas = db['tarefas']
