@@ -5,7 +5,7 @@ from app.presentation.controllers import tarefa_controller
 
 app = FastAPI()
 
-origins = ['http://localhost:5500', 'http://127.0.0.1:5500', 'https://tarefasappgs.netlify.app/']
+origins = ['http://localhost:5500', 'http://127.0.0.1:5500', 'https://tarefasappgs.netlify.app']
 
 app.add_middleware(CORSMiddleware,
                    allow_origins=origins,
