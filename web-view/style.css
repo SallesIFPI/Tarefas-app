@@ -258,10 +258,26 @@ select {
 
 /* Responsive */
 @media (max-width:760px) {
+    body{
+        padding: 0;
+        background: #1c4406;
+    }
+
     .container {
         display: block;
         width: 500px;
         text-align: center;
+        box-shadow: none;
+        border-radius: 0;
+        border: 0;
+    }
+
+    .container .column {
+        background: none !important;
+    }
+
+    .container .column:last-child {
+        border-top: 3px solid #033518;
     }
 
     .flex {
@@ -286,4 +302,3 @@ select {
     }
 
 }
-
