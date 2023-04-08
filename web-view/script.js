@@ -1,4 +1,4 @@
-baseURL = 'http://127.0.0.1:8000/tarefas'
+baseURL = 'https://tarefasappgs.onrender.com/tarefas'
 
 // Elementos
 const task_Create = document.querySelector('.task-list');
