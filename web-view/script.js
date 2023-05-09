@@ -68,7 +68,8 @@ function exibir_tarefa(tarefa) {
     if (tarefa.situacao === 'Cancelada' || tarefa.situacao === 'Completa'){
         div_btn.removeChild(btn_editar)
     }
-    btn_editar.onclick = async () => {
+    btn_editar.onclick = async (event) => {
+        event.preventDefault();
         window.scrollTo(0, 0);
         tarefa_id = tarefa.id
 
@@ -76,7 +77,8 @@ function exibir_tarefa(tarefa) {
         editar_task.classList.remove('toggle')
 
         const form_create = document.querySelector('.form-situation')
-        form_create.addEventListener("submit", async function(){
+        form_create.addEventListener("submit", async function(event){
+            event.preventDefault();
 
             if (tarefa.situation === 'Cancelada'){
                 alert("Apenas tarefas novas ou em andamento podem ser suspensas")
